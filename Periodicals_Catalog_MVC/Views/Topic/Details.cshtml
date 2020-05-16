@@ -1,0 +1,30 @@
+﻿@model Periodicals_Catalog_MVC.Models.TopicModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    @{
+        foreach (var periodical in Model.Periodicals)
+        {
+            <div>
+                <a href="~/Periodical/Details/@periodical.Id">
+                    <div>
+                        <img class="img-details" src="~/Images/@periodical.ImageName" />
+                        <div>@periodical.Name </div>
+                        @if (periodical.Annotation.Length < 200)
+                        {
+                            <div>@periodical.Annotation</div>
+                        }
+                        else
+                        {
+                            <div>@periodical.Annotation.Substring(0, 200) ...  </div>
+                        }
+                    </div>
+                </a>
+            </div>
+        }
+    }
+</div>
+

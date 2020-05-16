@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Periodicals_Catalog_MVC.Models.TopicModel>
+
+<div class="row">
+    @{
+        foreach (var topic in Model)
+        {
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <div class="info-box" data->
+                    <a href="~/Topic/Details/@topic.Id">
+                        <img class="img-icon" src="~/Images/Topics/@topic.ImageName"/>
+                        <div class="title">@topic.Name </div>
+                    </a>
+                </div>
+            </div>
+        }
+    }
+</div>
+

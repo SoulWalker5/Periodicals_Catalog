@@ -1,0 +1,62 @@
+﻿@model Periodicals_Catalog_MVC.Models.PeriodicalModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<fieldset>
+    <div>
+        <div>
+            <img class="img-details" src="~/Images/@Model.ImageName"/>
+        </div>
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Period)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Period)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ImageName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ImageName)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.NumberOfPublications)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.NumberOfPublications)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Annotation)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Annotation)
+                </dd>
+
+            </dl>
+        </div>
+    </div>
+</fieldset>
+
+<div id="footer_details">
+    <p>
+        @Html.ActionLink("Show All", "Index")
+    </p>
+</div>

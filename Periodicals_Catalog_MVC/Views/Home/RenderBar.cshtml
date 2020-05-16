@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Periodicals_Catalog_MVC.Models.TopicModel>
+
+
+@foreach (var topic in Model)
+{
+    <li class="sub-menu">
+
+        <a href="javascript:;" class="">
+            <span class="menu-arrow arrow_carrot-right"></span>
+            @topic.Name
+        </a>
+
+        <ul class="sub">
+            @foreach (var periodical in topic.Periodicals)
+            {
+                <li>
+                    @Html.ActionLink(periodical.Name, "Details", "Periodical", new { id = periodical.Id }, null)
+                </li>
+            }
+        </ul>
+    </li>
+}

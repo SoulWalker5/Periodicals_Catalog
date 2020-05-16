@@ -1,0 +1,69 @@
+﻿aside {
+    float: left;
+    padding-right: 15px;
+}
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+#container {
+    width: 100%;
+    height: 100%;
+}
+
+#main-content {
+    margin-left: 180px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+#topic_list {
+    float: left;
+    font-family: Rockwell, Consolas, "Courier New", Courier, monospace;
+    padding: 3%;
+    width: 120%;
+}
+
+.topic_block {
+    width: 18%;
+    margin-bottom: 5%;
+    padding: 1%;
+    float: left;
+    text-align: center;
+    padding-top: 2px;
+}
+
+.topic_block_inner {
+    width: 80%;
+    margin-left: 2px;
+}
+
+    .topic_block_inner:hover {
+        cursor: pointer;
+        width: 80%;
+        background-color: #e2e2e2;
+    }
+
+    .topic_block_inner a:hover {
+        background-color: #e2e2e2;
+    }

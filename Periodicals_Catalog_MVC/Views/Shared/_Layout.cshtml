@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+
+<body>
+    <section id="container" class="">
+        <header class="header dark-bg">
+            <div class="toggle-nav">
+                <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
+            </div>
+
+            @Html.ActionLink("Periodicals Catalog", "Index", "Home", new { area = "" }, new { @class = "logo" })
+
+        </header>
+
+        <!-- sidebar menu start-->
+        <aside>
+            <div id="sidebar" class="nav-collapse ">
+                <ul class="sidebar-menu">
+                    @{
+                        Html.RenderAction("RenderBar", "Home");
+                    }
+
+                </ul>
+
+            </div>
+        </aside>
+        <!-- sidebar menu end-->
+
+        <section id="main-content">
+            <section class="wrapper">
+                <div id="body">
+
+                    @RenderBody()
+
+
+                </div>
+
+            </section>
+
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
+        </section>
+
+    </section>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jsscripts")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
