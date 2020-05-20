@@ -18,18 +18,16 @@
 
             @Html.ActionLink("Periodicals Catalog", "Index", "Home", new { area = "" }, new { @class = "logo" })
 
+            @{ Html.RenderPartial("_LoginPartial", "Account");}
+
         </header>
 
         <!-- sidebar menu start-->
         <aside>
             <div id="sidebar" class="nav-collapse ">
                 <ul class="sidebar-menu">
-                    @{
-                        Html.RenderAction("RenderBar", "Home");
-                    }
-
+                    @{ Html.RenderAction("RenderBar", "Home");}
                 </ul>
-
             </div>
         </aside>
         <!-- sidebar menu end-->
@@ -37,19 +35,14 @@
         <section id="main-content">
             <section class="wrapper">
                 <div id="body">
-
                     @RenderBody()
-
-
                 </div>
-
             </section>
 
             <footer>
                 <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
             </footer>
         </section>
-
     </section>
 
     @Scripts.Render("~/bundles/jquery")
