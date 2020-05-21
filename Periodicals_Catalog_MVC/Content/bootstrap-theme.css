@@ -760,6 +760,20 @@ pre code {
   min-height: 1px;
   padding-left: 15px;
   padding-right: 15px;
+  padding-bottom: 25px;
+}
+.col-lg-13 {
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.col-lg-21 {
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
 }
 .col-xs-1,
 .col-xs-2,
@@ -967,19 +981,20 @@ pre code {
   .container {
     max-width: 970px;
   }
-  .col-md-1,
-  .col-md-2,
-  .col-md-3,
-  .col-md-4,
-  .col-md-5,
-  .col-md-6,
-  .col-md-7,
-  .col-md-8,
-  .col-md-9,
-  .col-md-10,
-  .col-md-11 {
-    float: left;
-  }
+    .col-md-1,
+    .col-md-2,
+    .col-md-3,
+    .col-md-4,
+    .col-md-5,
+    .col-md-6,
+    .col-md-7,
+    .col-md-8,
+    .col-md-9,
+    .col-md-10,
+    .col-md-11,
+    .col-md-12 {
+        float: left;
+    }
   .col-md-1 {
     width: 8.333333333333332%;
   }

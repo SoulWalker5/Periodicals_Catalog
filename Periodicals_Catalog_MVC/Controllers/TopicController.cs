@@ -30,10 +30,23 @@ namespace Periodicals_Catalog_MVC.Controllers
         }
 
         // GET: Topic/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int id, string sortOrder)
         {
             var modelBL = _service.FindById(id);
             var modelView = _mapper.Map<TopicModel>(modelBL);
+
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.NumberSortParm = sortOrder == "Number" ? "number_desc" : "Number";
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    modelView.Periodicals = modelView.Periodicals.OrderByDescending(s => s.Name);
+                    break;
+                default:
+                    modelView.Periodicals = modelView.Periodicals.OrderBy(s => s.Name);
+                    break;
+            }
 
             return View(modelView);
         }

@@ -5,7 +5,7 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Name)
+                    @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm })
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Period)
@@ -14,7 +14,7 @@
                     @Html.DisplayNameFor(model => model.ImageName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.NumberOfPublications)
+                    @Html.ActionLink("Number Of Publications", "Index", new { sortOrder = ViewBag.NumberSortParm })
                 </th>
                 <th></th>
             </tr>

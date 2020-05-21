@@ -51,7 +51,7 @@ namespace DAL
                     Annotation = "Bon Appétit is a monthly American food and entertaining magazine, " +
                     "that typically contains recipes, entertaining ideas, and wine reviews. " +
                     "Owned by Condé Nast, it is headquartered at the One World Trade Center in Manhattan, " +
-                    "New York City and has been in publication since 1956.[2] Bon Appétit has been recognized " +
+                    "New York City and has been in publication since 1956. Bon Appétit has been recognized " +
                     "for increasing its online presence in recent years through the use of social media, publishing" +
                     " recipes on their website, and maintaining an increasingly popular YouTube channel."
                 });

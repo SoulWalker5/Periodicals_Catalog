@@ -4,15 +4,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div>
-    @{
-        foreach (var periodical in Model.Periodicals)
-        {
-            <div>
-                <a href="~/Periodical/Details/@periodical.Id">
-                    <div>
-                        <img class="img-details" src="~/Images/@periodical.ImageName" />
-                        <div>@periodical.Name </div>
+<div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+        @Html.ActionLink("Name", "Details/" + Model.Id, new { sortOrder = ViewBag.NameSortParm })
+    </div>
+</div>
+
+@{
+    foreach (var periodical in Model.Periodicals)
+    {
+
+        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+            <a href="~/Periodical/Details/@periodical.Id">
+                <div>
+                    <img class="img-details" src="~/Images/@periodical.ImageName" />
+                    <div class="col-lg-21">@periodical.Name </div>
+                    <div class="col-lg-13">
                         @if (periodical.Annotation.Length < 200)
                         {
                             <div>@periodical.Annotation</div>
@@ -22,9 +29,11 @@
                             <div>@periodical.Annotation.Substring(0, 200) ...  </div>
                         }
                     </div>
-                </a>
-            </div>
-        }
+
+
+                </div>
+            </a>
+        </div>
     }
-</div>
+}
 
