@@ -680,7 +680,8 @@ ul.sidebar-menu li.active a i {
 .wrapper {
     display: inline-block;
     margin-top: 60px;
-    padding: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
     width: 100%;
 }
 
@@ -1345,6 +1346,12 @@ div[data-role="editor-toolbar"] {
     color: #fff;
     background: #1a2732;
     background-color: #1a2732;
+}
+
+.filter-bg {
+    color: #fff;
+    background: #394a59;
+    background-color: #394a59;
 }
 
 .facebook-bg {

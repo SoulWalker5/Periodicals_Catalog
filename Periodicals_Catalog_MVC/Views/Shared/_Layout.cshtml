@@ -16,7 +16,30 @@
                 <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
             </div>
 
+
+
             @Html.ActionLink("Periodicals Catalog", "Index", "Home", new { area = "" }, new { @class = "logo" })
+
+
+
+            <div class="nav search-row" id="top_menu">
+                <!--  search form start -->
+                <ul class="nav top-menu">
+                    <li>
+                        @*@using (Html.BeginForm())
+                            {
+                                <p>
+                                    @Html.TextBox("SearchString")
+                                    <input type="submit" value="Search" />
+                                </p>
+                            }*@
+                        <form class="navbar-form">
+                            <input id="SearchString" name="SearchString" class="form-control" placeholder="Search" type="text">
+                        </form>
+                    </li>
+                </ul>
+                <!--  search form end -->
+            </div>
 
             @{ Html.RenderPartial("_LoginPartial", "Account");}
 
@@ -34,9 +57,7 @@
 
         <section id="main-content">
             <section class="wrapper">
-                <div id="body">
                     @RenderBody()
-                </div>
             </section>
 
             <footer>

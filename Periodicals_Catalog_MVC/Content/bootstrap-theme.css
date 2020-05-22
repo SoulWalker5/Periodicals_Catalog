@@ -109,8 +109,8 @@ img {
     width: 150px;
 }
 .img-details {
-    height: 600px;
-    width: 400px;
+    height: 500px;
+    width: 300px;
 }
 
 svg:not(:root) {

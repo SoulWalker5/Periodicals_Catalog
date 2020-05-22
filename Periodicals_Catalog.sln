@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Periodicals_Catalog", "Periodicals_Catalog\Periodicals_Catalog.csproj", "{CF47A8C3-95E2-47A3-9C52-588CD3A41957}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Periodicals_Catalog.Tests", "Periodicals_Catalog.Tests\Periodicals_Catalog.Tests.csproj", "{EB8D4A35-253E-4449-8B5D-ACD38218D465}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Periodicals_Catalog_MVC", "Periodicals_Catalog_MVC\Periodicals_Catalog_MVC.csproj", "{4A162079-E17E-4C2F-8FEC-A84DBE76E136}"
@@ -19,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CF47A8C3-95E2-47A3-9C52-588CD3A41957}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CF47A8C3-95E2-47A3-9C52-588CD3A41957}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CF47A8C3-95E2-47A3-9C52-588CD3A41957}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CF47A8C3-95E2-47A3-9C52-588CD3A41957}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EB8D4A35-253E-4449-8B5D-ACD38218D465}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EB8D4A35-253E-4449-8B5D-ACD38218D465}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB8D4A35-253E-4449-8B5D-ACD38218D465}.Release|Any CPU.ActiveCfg = Release|Any CPU

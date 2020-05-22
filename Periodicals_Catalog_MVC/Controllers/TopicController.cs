@@ -21,22 +21,34 @@ namespace Periodicals_Catalog_MVC.Controllers
         }
 
         // GET: Topic
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
             var modelBL = _service.GetAll().ToList();
             var modelView = _mapper.Map<IEnumerable<TopicModel>>(modelBL);
 
-            return View(modelView);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                modelView = modelView.Where(d => d.Periodicals.Where(p => p.Name.Contains(searchString)
+                                                    || p.Name.Contains(searchString.ToUpper())).Any());
+            }
+
+            return View(modelView.ToList());
         }
 
         // GET: Topic/Details/5
-        public ActionResult Details(int id, string sortOrder)
+        public ActionResult Details(int id, string sortOrder, string searchString)
         {
             var modelBL = _service.FindById(id);
             var modelView = _mapper.Map<TopicModel>(modelBL);
 
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.NumberSortParm = sortOrder == "Number" ? "number_desc" : "Number";
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                modelView.Periodicals = modelView.Periodicals.Where(s => s.Name.Contains(searchString)
+                               || s.Annotation.Contains(searchString));
+            }
 
             switch (sortOrder)
             {
@@ -68,7 +80,7 @@ namespace Periodicals_Catalog_MVC.Controllers
 
         // POST: Topic/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, TopicModel model)
+        public ActionResult Edit(TopicModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -83,7 +95,7 @@ namespace Periodicals_Catalog_MVC.Controllers
 
         // POST: Topic/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
             _service.Remove(id);
 

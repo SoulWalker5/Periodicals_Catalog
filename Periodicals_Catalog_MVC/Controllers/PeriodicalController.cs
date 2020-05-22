@@ -73,7 +73,7 @@ namespace Periodicals_Catalog_MVC.Controllers
 
         // POST: Periodical/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, PeriodicalModel model)
+        public ActionResult Edit(PeriodicalModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace Periodicals_Catalog_MVC.Controllers
 
         // POST: Periodical/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
             _service.Remove(id);
 

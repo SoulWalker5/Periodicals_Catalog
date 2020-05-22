@@ -130,12 +130,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Periodicals_Catalog\Periodicals_Catalog.csproj">
-      <Project>{CF47A8C3-95E2-47A3-9C52-588CD3A41957}</Project>
-      <Name>Periodicals_Catalog</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
