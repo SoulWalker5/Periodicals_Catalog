@@ -26,6 +26,11 @@ namespace Periodicals_Catalog_MVC.Controllers
             var modelBL = _service.GetAll().ToList();
             var modelView = _mapper.Map<IEnumerable<TopicModel>>(modelBL);
 
+            if (!User.IsInRole("Admin"))
+            {
+                modelView = modelView.Where(p => !p.Name.Contains("XXX"));
+            }
+
             if (!String.IsNullOrEmpty(searchString))
             {
                 modelView = modelView.Where(d => d.Periodicals.Where(p => p.Name.Contains(searchString)

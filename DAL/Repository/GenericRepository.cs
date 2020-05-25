@@ -31,6 +31,7 @@ namespace DAL.Repository
         public IEnumerable<T> GetAll()
         {
             var searachRes = _ctx.Set<T>();
+            //var searachRes = _ctx.Set<T>().AsNoTracking().ToList();
 
             return searachRes;
         }

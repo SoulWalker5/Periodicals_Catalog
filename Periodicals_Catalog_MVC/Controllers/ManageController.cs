@@ -66,6 +66,7 @@ namespace Periodicals_Catalog_MVC.Controllers
             var userId = User.Identity.GetUserId();
             var model = new IndexViewModel
             {
+                HasRoleAdmin = HasRoleAdmin(),
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
@@ -361,6 +362,12 @@ namespace Periodicals_Catalog_MVC.Controllers
                 return user.PasswordHash != null;
             }
             return false;
+        }
+        private bool HasRoleAdmin()
+        {
+            var user = UserManager.IsInRole(User.Identity.GetUserId(), "Admin");
+
+            return user;
         }
 
         private bool HasPhoneNumber()

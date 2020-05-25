@@ -26,11 +26,6 @@ namespace Periodicals_Catalog_MVC.Controllers
         }
         public RedirectResult Index()
         {
-            //var topic = _topic.GetAll().ToList();
-            //var topicView = _mapper.Map<IEnumerable<TopicModel>>(topic);
-
-            //return View(topicView);
-
             return RedirectPermanent("/Topic/Index");
         }
 
@@ -53,6 +48,11 @@ namespace Periodicals_Catalog_MVC.Controllers
         {
             var topic = _topic.GetAll().ToList();
             var topicView = _mapper.Map<IEnumerable<TopicModel>>(topic);
+
+            if (!User.IsInRole("Admin"))
+            {
+                topicView = topicView.Where(p => !p.Name.Contains("XXX"));
+            }
 
             return PartialView("RenderBar", topicView);
         }

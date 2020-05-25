@@ -23,6 +23,7 @@ namespace DAL
                 context.Topics.Add(new Topic() { Name = "Men", ImageName = "men.jpg" });
                 context.Topics.Add(new Topic() { Name = "Fashion", ImageName = "fashion.jpg" });
                 context.Topics.Add(new Topic() { Name = "Business", ImageName = "business.jpg" });
+                context.Topics.Add(new Topic() { Name = "XXX", ImageName = "XXX.jpg" });
 
                 context.SaveChanges();
 
@@ -173,7 +174,7 @@ namespace DAL
                 context.Periodicals.Add(new Periodical
                 {
                     Name = "Maxim",
-                    Topic = context.Topics.Where(t => t.Name == "Men").FirstOrDefault(),
+                    Topic = context.Topics.Where(t => t.Name == "XXX").FirstOrDefault(),
                     Period = "1 per Month",
                     NumberOfPublications = 120,
                     ImageName = "Maxim.jpg",
@@ -236,7 +237,7 @@ namespace DAL
                 context.Periodicals.Add(new Periodical
                 {
                     Name = "PLAYBOY",
-                    Topic = context.Topics.Where(t => t.Name == "Men").FirstOrDefault(),
+                    Topic = context.Topics.Where(t => t.Name == "XXX").FirstOrDefault(),
                     Period = "1 per Month",
                     NumberOfPublications = 150,
                     ImageName = "Playboy.jpg",
@@ -254,7 +255,7 @@ namespace DAL
                 {
                     Name = "Sport",
                     Topic = context.Topics.Where(t => t.Name == "Sport").FirstOrDefault(),
-                    Period = "1 per Month",
+                    Period = "2 per Month",
                     NumberOfPublications = 150,
                     ImageName = "Sport.jpg",
                     Annotation = "SPORT predated the launch of Sports Illustrated by eight years," +

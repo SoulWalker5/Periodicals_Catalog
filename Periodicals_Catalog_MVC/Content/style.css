@@ -2459,7 +2459,7 @@ div[data-role="editor-toolbar"] {
 
 
 .personal-task tbody tr td {
-    padding: 11px 15px;
+    /*padding: 11px 15px;*/
     border-color: #eeeff1;
 }
 
@@ -2489,7 +2489,7 @@ div[data-role="editor-toolbar"] {
 
 
 .personal-task > tbody > tr > td:last-child {
-    text-align: right;
+    text-align: left;
 }
 
 

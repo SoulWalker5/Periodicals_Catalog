@@ -25,6 +25,11 @@ namespace Periodicals_Catalog_MVC.Controllers
             var modelBL = _service.GetAll().ToList();
             var modelView = _mapper.Map<IEnumerable<PeriodicalModel>>(modelBL);
 
+            if (!User.IsInRole("Admin"))
+            {
+                modelView = modelView.Where(p => !p.Topic.Name.Contains("XXX"));
+            }
+
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.NumberSortParm = sortOrder == "Number" ? "number_desc" : "Number";
 
@@ -55,6 +60,20 @@ namespace Periodicals_Catalog_MVC.Controllers
 
             return View(modelView);
         }
+        public ActionResult Create()
+        {
+            //var select = _service.GetAll().Where(x => x.Period.Any()).Distinct();
+            //var var = _service.GetAll().Select(x => x.Period).Distinct();
+            //List<SelectListItem> myList = new List<SelectListItem>();
+            //var data = new[]{
+            //     new SelectListItem{ Value="Period",Text=var.FirstOrDefault()},
+            //var ger = var.Select(str => new PeriodicalModel { Period = str });
+            //var hz = context.Roles.Where(u => !u.Name.Contains("Admin")).ToList();
+
+            ViewBag.Period = new SelectList(_service.GetAll().Select(x => x.Period).Distinct(), "Period");
+
+            return View();
+        }
 
         // POST: Periodical/Create
         [HttpPost]
@@ -62,6 +81,7 @@ namespace Periodicals_Catalog_MVC.Controllers
         {
             if (!ModelState.IsValid)
             {
+                ViewBag.Period = new SelectList(_service.GetAll().Select(x => x.Period).Distinct(), "Period");
                 return View(model);
             }
 
@@ -69,6 +89,11 @@ namespace Periodicals_Catalog_MVC.Controllers
             _service.Create(articleBL);
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Edit()
+        {
+            return View();
         }
 
         // POST: Periodical/Edit/5
@@ -84,6 +109,11 @@ namespace Periodicals_Catalog_MVC.Controllers
             _service.Update(modelBL);
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Delete()
+        {
+            return View();
         }
 
         // POST: Periodical/Delete/5
