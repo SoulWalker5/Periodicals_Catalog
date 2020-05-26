@@ -31,22 +31,9 @@ namespace Periodicals_Catalog_MVC.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                ////var search = modelView.Where(p => p.Name.Equals(searchString, StringComparison.CurrentCultureIgnoreCase));
 
                 periodiaclView = periodiaclView.Where(d => d.Name.Equals(searchString, StringComparison.CurrentCultureIgnoreCase) || d.Topic.Name.Equals(searchString, StringComparison.CurrentCultureIgnoreCase));
 
-                //topicView = topicView.Where(d => d.Name.Equals(searchString, StringComparison.CurrentCultureIgnoreCase) || d.Periodicals.Where(p => p.Name.Equals(searchString, StringComparison.CurrentCultureIgnoreCase)).Any());
-                ////if (!topicView.Any())
-                ////{
-                ////    periodiaclView = periodiaclView.Where(p => p.Name.Equals(searchString, StringComparison.CurrentCultureIgnoreCase));
-
-                ////    if (!periodiaclView.Any())
-                ////    {
-                ////        return RedirectToAction("Index", "Topic");
-                ////    }
-                ////    //@Html.ActionLink("Name", "Details/" + Model.Id, new { sortOrder = ViewBag.NameSortParm })
-                ////    return View("~/Views/Periodical/Details.cshtml", "_Layout", periodiaclView);
-                ////}
             }
 
             return View(/*"~/Views/Topic/Index.cshtml", "_Layout", */periodiaclView);
