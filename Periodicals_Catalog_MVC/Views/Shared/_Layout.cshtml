@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html id="top">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,26 +16,19 @@
                 <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
             </div>
 
-
-
             @Html.ActionLink("Periodicals Catalog", "Index", "Home", new { area = "" }, new { @class = "logo" })
-
-
 
             <div class="nav search-row" id="top_menu">
                 <!--  search form start -->
                 <ul class="nav top-menu">
                     <li>
-                        @*@using (Html.BeginForm())
-                            {
-                                <p>
-                                    @Html.TextBox("SearchString")
-                                    <input type="submit" value="Search" />
-                                </p>
-                            }*@
-                        <form class="navbar-form">
-                            <input id="SearchString" name="SearchString" class="form-control" placeholder="Search" type="text">
-                        </form>
+                        @using (Html.BeginForm("Index", "Search", new { @class = "navbar-form" }))
+                        {
+                            <input id="SearchString" name="SearchString" class="form-control" placeholder="Search" type="text" autocomplete="on">
+                        }
+                        @*<form class="navbar-form">
+                                <input id="SearchString" name="SearchString" class="form-control" placeholder="Search" type="text">
+                            </form>*@
                     </li>
                 </ul>
                 <!--  search form end -->
@@ -57,10 +50,12 @@
 
         <section id="main-content">
             <section class="wrapper">
-                    @RenderBody()
+                @RenderBody()
+                
+                <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
             </section>
 
-            <footer>
+            <footer id="bottom">
                 <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
             </footer>
         </section>

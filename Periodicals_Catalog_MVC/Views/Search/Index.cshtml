@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Periodicals_Catalog_MVC.Models.PeriodicalModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<body>
+    <table class="table table-hover personal-task">
+        <tbody>
+            @foreach (var periodical in Model)
+            {
+                <tr>
+                    <td>
+                        Periodical:
+                        @Html.ActionLink(periodical.Name, "Details/" + periodical.Id, "Periodical")
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Topic:
+                        @Html.ActionLink(periodical.Topic.Name, "Details/" + periodical.Topic.Id, "Topic")
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>

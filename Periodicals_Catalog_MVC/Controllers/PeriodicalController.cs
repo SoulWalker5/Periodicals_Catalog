@@ -19,6 +19,7 @@ namespace Periodicals_Catalog_MVC.Controllers
             _service = service;
             _mapper = mapper;
         }
+
         // GET: Periodical
         public ActionResult Index(string sortOrder)
         {
@@ -62,15 +63,7 @@ namespace Periodicals_Catalog_MVC.Controllers
         }
         public ActionResult Create()
         {
-            //var select = _service.GetAll().Where(x => x.Period.Any()).Distinct();
-            //var var = _service.GetAll().Select(x => x.Period).Distinct();
-            //List<SelectListItem> myList = new List<SelectListItem>();
-            //var data = new[]{
-            //     new SelectListItem{ Value="Period",Text=var.FirstOrDefault()},
-            //var ger = var.Select(str => new PeriodicalModel { Period = str });
-            //var hz = context.Roles.Where(u => !u.Name.Contains("Admin")).ToList();
-
-            ViewBag.Period = new SelectList(_service.GetAll().Select(x => x.Period).Distinct(), "Period");
+            DataForDropDown();
 
             return View();
         }
@@ -81,7 +74,8 @@ namespace Periodicals_Catalog_MVC.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.Period = new SelectList(_service.GetAll().Select(x => x.Period).Distinct(), "Period");
+                DataForDropDown();
+
                 return View(model);
             }
 
@@ -91,9 +85,14 @@ namespace Periodicals_Catalog_MVC.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Edit()
+        public ActionResult Edit(int id)
         {
-            return View();
+            var modelBL = _service.FindById(id);
+            var modelView = _mapper.Map<PeriodicalModel>(modelBL);
+
+            DataForDropDown();
+
+            return View(modelView);
         }
 
         // POST: Periodical/Edit/5
@@ -102,6 +101,8 @@ namespace Periodicals_Catalog_MVC.Controllers
         {
             if (!ModelState.IsValid)
             {
+                DataForDropDown();
+
                 return View(model);
             }
 
@@ -111,18 +112,29 @@ namespace Periodicals_Catalog_MVC.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Delete()
+        public ActionResult Delete(int id)
         {
-            return View();
+            var modelBL = _service.FindById(id);
+            var modelView = _mapper.Map<PeriodicalModel>(modelBL);
+
+            DataForDropDown();
+
+            return View(modelView);
         }
 
         // POST: Periodical/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(PeriodicalModel model)
         {
-            _service.Remove(id);
+            _service.Remove(model.Id);
 
             return RedirectToAction("Index");
         }
+
+        public void DataForDropDown()
+        {
+            ViewBag.Period = new SelectList(_service.GetAll().Select(x => x.Period).Distinct(), "Period");
+            ViewBag.Topic = new SelectList(_service.GetAll().Select(x => x.Topic).Select(c => c.Name), "Topic");
+        } 
     }
 }

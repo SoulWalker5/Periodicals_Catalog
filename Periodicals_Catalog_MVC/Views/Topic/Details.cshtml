@@ -4,11 +4,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row filter-bg">
-    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-        @Html.ActionLink("Name", "Details/" + Model.Id, new { sortOrder = ViewBag.NameSortParm })
-    </div>
-</div>
+<section class="panel">
+    <header class="panel-heading tab-bg-primary">
+        <ul class="nav nav-tabs">
+            <li class="">
+                @Html.ActionLink("Create new Topic", "Create")
+            </li>
+            <li class="">
+                @Html.ActionLink("Name", "Details/" + Model.Id, new { sortOrder = ViewBag.NameSortParm })
+            </li>
+            <li>
+                <a href="#bottom" >Jump bottom</a>
+            </li>
+        </ul>
+    </header>
+</section>
 
 @{
     foreach (var periodical in Model.Periodicals)
@@ -29,8 +39,6 @@
                             <div>@periodical.Annotation.Substring(0, 200) ...  </div>
                         }
                     </div>
-
-
                 </div>
             </a>
         </div>

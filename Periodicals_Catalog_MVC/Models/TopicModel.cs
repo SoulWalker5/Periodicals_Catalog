@@ -13,9 +13,8 @@ namespace Periodicals_Catalog_MVC.Models
         [Required]
         public string Name { get; set; }
 
-        [Required]
         public string ImageName { get; set; }
 
-        public virtual IEnumerable<PeriodicalModel> Periodicals { get; set; }
+        public IEnumerable<PeriodicalModel> Periodicals { get; set; }
     }
 }

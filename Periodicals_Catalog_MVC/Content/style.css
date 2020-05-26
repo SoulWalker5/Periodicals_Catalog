@@ -680,8 +680,8 @@ ul.sidebar-menu li.active a i {
 .wrapper {
     display: inline-block;
     margin-top: 60px;
-    padding-left: 15px;
-    padding-right: 15px;
+    /*padding-left: 15px;*/
+    /*padding-right: 15px;*/
     width: 100%;
 }
 
@@ -1087,7 +1087,6 @@ div[data-role="editor-toolbar"] {
 
 .top-nav ul.top-menu > li > a {
     padding: 8px;
-    background: none;
     margin-right: 0;
 }
 
@@ -1382,6 +1381,7 @@ div[data-role="editor-toolbar"] {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
+    margin-top: 10px;
     margin-bottom: 30px;
 }
 
@@ -1414,6 +1414,7 @@ div[data-role="editor-toolbar"] {
         .panel .panel-heading ul li {
             border-top: 1px solid #e6e6e6;
             border-left: 1px solid #e6e6e6;
+            border-bottom: 1px solid #e6e6e6;
             border-right: 1px solid #e6e6e6;
         }
 
@@ -3365,7 +3366,7 @@ ul.ft-link {
 
     .social-box ul {
         list-style: none;
-        padding: 10px 0;
+        /*padding: 10px 0;*/
     }
 
         .social-box ul li {
@@ -5083,14 +5084,14 @@ ul.amounts li {
 
 .panel-heading .nav {
     border: medium none;
-    font-size: 13px;
+    font-size: 14px;
     margin: -10px -15px -11px;
 }
 
 
 
 .tab-bg-primary {
-    background: #688a7e;
+    background: #394a59;
     border-bottom: none;
 }
 
@@ -5118,7 +5119,7 @@ ul.amounts li {
 
 
 .panel-heading .nav > li > a {
-    color: #fff;
+    color: #d0d8df;
 }
 
 

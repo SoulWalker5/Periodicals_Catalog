@@ -67,6 +67,10 @@ namespace Periodicals_Catalog_MVC.Controllers
 
             return View(modelView);
         }
+        public ActionResult Create()
+        {
+            return View();
+        }
 
         // POST: Topic/Create
         [HttpPost]
@@ -81,6 +85,14 @@ namespace Periodicals_Catalog_MVC.Controllers
             _service.Create(articleBL);
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var modelBL = _service.FindById(id);
+            var modelView = _mapper.Map<PeriodicalModel>(modelBL);
+
+            return View(modelView);
         }
 
         // POST: Topic/Edit/5
@@ -98,11 +110,19 @@ namespace Periodicals_Catalog_MVC.Controllers
             return RedirectToAction("Index");
         }
 
-        // POST: Topic/Delete/5
-        [HttpPost]
         public ActionResult Delete(int id)
         {
-            _service.Remove(id);
+            var modelBL = _service.FindById(id);
+            var modelView = _mapper.Map<TopicModel>(modelBL);
+
+            return View(modelView);
+        }
+
+        // POST: Topic/Delete/5
+        [HttpPost]
+        public ActionResult Delete(TopicModel model)
+        {
+            _service.Remove(model.Id);
 
             return RedirectToAction("Index");
         }

@@ -27,6 +27,6 @@ namespace Periodicals_Catalog_MVC.Models
         [Required]
         public string Annotation { get; set; }
 
-        public virtual TopicModel Topic { get; set; }
+        public TopicModel Topic { get; set; }
     }
 }

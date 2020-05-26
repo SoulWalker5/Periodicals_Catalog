@@ -12,7 +12,18 @@ namespace DAL
     {
         public DbSet<Topic> Topics { get; set; }
         public DbSet<Periodical> Periodicals { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Topic>()
+                .HasMany(x => x.Periodicals)
+                .WithRequired(x => x.Topic)
+                .WillCascadeOnDelete(true);
+        }
     }
+    
 
 
 }
