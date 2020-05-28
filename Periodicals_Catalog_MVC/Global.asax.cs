@@ -17,7 +17,6 @@ namespace Periodicals_Catalog_MVC
         {
             AreaRegistration.RegisterAllAreas();
             Database.SetInitializer(new PeriodicalsInitializer());
-            GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);

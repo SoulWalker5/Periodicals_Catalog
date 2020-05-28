@@ -227,10 +227,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\aspnet-Periodicals_Catalog_MVC-20200426053837.mdf" />
-    <Content Include="App_Data\aspnet-Periodicals_Catalog_MVC-20200426053837_log.ldf">
-      <DependentUpon>aspnet-Periodicals_Catalog_MVC-20200426053837.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -438,7 +434,9 @@
     <Content Include="Views\Topic\Delete.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
