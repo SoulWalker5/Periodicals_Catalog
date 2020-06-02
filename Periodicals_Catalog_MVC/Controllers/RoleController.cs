@@ -1,9 +1,13 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 using Periodicals_Catalog_MVC.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,32 +16,31 @@ namespace Periodicals_Catalog_MVC.Controllers
 
     public class RoleController : Controller
     {
-        private ApplicationDbContext context;
+        private readonly ApplicationDbContext context;
+        private RoleManager<IdentityRole> _roleManager;
+        private UserManager<ApplicationUser> _userManager;
 
         public RoleController()
         {
             context = new ApplicationDbContext();
+            _roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+        }
+        public RoleController(UserManager<ApplicationUser> userManager)
+        {
+            _userManager = userManager;
         }
 
-        // GET: Role
+        // GET: Role/Index
         public ActionResult Index()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                if (!isAdminUser())
-                {
-                    return RedirectToAction("Index", "Home");
-                }
-            }
-
-            else
+            if (!User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Home");
             }
 
-            var Roles = context.Roles.ToList();
+            var roles = context.Roles.ToList();
 
-            return View(Roles);
+            return View(roles);
         }
 
         public ActionResult Create()
@@ -48,41 +51,12 @@ namespace Periodicals_Catalog_MVC.Controllers
         [HttpPost]
         public ActionResult Create(IdentityRole model)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return View(model);
-            //}
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-
-            if (!roleManager.RoleExists(model.Name))
+            if(!_roleManager.RoleExists(model.Name))
             {
-                roleManager.Create(model);
+                _roleManager.Create(model);
             }
-            //context.Roles.Add(model);
 
             return RedirectToAction("Index");
-        }
-
-        public bool isAdminUser()
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                var user = User.Identity;
-                ApplicationDbContext context = new ApplicationDbContext();
-                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-                var s = UserManager.GetRoles(user.GetUserId());
-
-                if (s[0].ToString() == "Admin")
-                {
-                    return true;
-                }
-
-                else
-                {
-                    return false;
-                }
-            }
-            return false;
         }
     }
 }

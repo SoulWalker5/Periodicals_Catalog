@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -16,5 +17,7 @@ namespace Periodicals_Catalog_MVC.Models
         public string ImageName { get; set; }
 
         public IEnumerable<PeriodicalModel> Periodicals { get; set; }
+
+        public PageSetup PageSetup { get; set; }
     }
 }

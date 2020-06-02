@@ -218,6 +218,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\PagingHelpers.cs" />
+    <Compile Include="Migrations\202004261439472_InitialCreate.cs" />
+    <Compile Include="Migrations\202004261439472_InitialCreate.Designer.cs">
+      <DependentUpon>202004261439472_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005301524525_AddPageSize.cs" />
+    <Compile Include="Migrations\202005301524525_AddPageSize.Designer.cs">
+      <DependentUpon>202005301524525_AddPageSize.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -227,6 +237,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-Periodicals_Catalog_MVC-20200426053837.mdf" />
+    <Content Include="App_Data\aspnet-Periodicals_Catalog_MVC-20200426053837_log.ldf">
+      <DependentUpon>aspnet-Periodicals_Catalog_MVC-20200426053837.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -433,10 +447,10 @@
     <Content Include="Views\Topic\Edit.cshtml" />
     <Content Include="Views\Topic\Delete.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Manage\SetPageSize.cshtml" />
+    <Content Include="Views\Role\Delete.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
@@ -455,6 +469,14 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202004261439472_InitialCreate.resx">
+      <DependentUpon>202004261439472_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005301524525_AddPageSize.resx">
+      <DependentUpon>202005301524525_AddPageSize.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

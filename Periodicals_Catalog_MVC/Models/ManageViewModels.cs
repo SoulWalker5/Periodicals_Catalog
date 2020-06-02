@@ -1,10 +1,35 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
 namespace Periodicals_Catalog_MVC.Models
 {
+    public class PageSetup
+    {
+        public int PageNumber { get; set; } // number of current page
+
+        private int _pageSize = 2; // default setting
+        private int MaxPageSize = 30; // maximum page size
+        /// <summary>
+        /// amount of objects per page
+        /// </summary>
+        [Required, Range(1, 100,
+        ErrorMessage = "Value for {0} must be between {1} and {2}.")]
+        public int PageSize
+        {
+            get => _pageSize;
+            set => _pageSize = (value > MaxPageSize) ? MaxPageSize : value;
+        }
+
+        public int TotalItems { get; set; }
+        public int TotalPages
+        {
+            get { return (int)Math.Ceiling((decimal)TotalItems / PageSize); }
+        }
+    }
+
     public class IndexViewModel
     {
         public bool HasRoleAdmin { get; set; }

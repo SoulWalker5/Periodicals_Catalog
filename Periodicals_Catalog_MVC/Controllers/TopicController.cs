@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using BLL.Interface;
 using BLL.ModelBL;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using Periodicals_Catalog_MVC.Models;
 using System;
 using System.Collections.Generic;
@@ -12,16 +14,34 @@ namespace Periodicals_Catalog_MVC.Controllers
 {
     public class TopicController : Controller
     {
+        private ApplicationUserManager _userManager;
         private readonly ITopicService _service;
         private readonly IMapper _mapper;
-        public TopicController(ITopicService service, IMapper mapper)
+        
+        public TopicController(ApplicationUserManager userManager)
+        {
+            UserManager = userManager;
+        }
+
+        public TopicController( ITopicService service, IMapper mapper)
         {
             _service = service;
             _mapper = mapper;
         }
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
         // GET: Topic
-        public ActionResult Index(string searchString)
+        public ActionResult Index()
         {
             var modelBL = _service.GetAll().ToList();
             var modelView = _mapper.Map<IEnumerable<TopicModel>>(modelBL);
@@ -31,29 +51,17 @@ namespace Periodicals_Catalog_MVC.Controllers
                 modelView = modelView.Where(p => !p.Name.Contains("XXX"));
             }
 
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                modelView = modelView.Where(d => d.Periodicals.Where(p => p.Name.Contains(searchString)
-                                                    || p.Name.Contains(searchString.ToUpper())).Any());
-            }
-
             return View(modelView.ToList());
         }
 
         // GET: Topic/Details/5
-        public ActionResult Details(int id, string sortOrder, string searchString)
+        public ActionResult Details(int id, string sortOrder, int? page)
         {
             var modelBL = _service.FindById(id);
             var modelView = _mapper.Map<TopicModel>(modelBL);
 
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.NumberSortParm = sortOrder == "Number" ? "number_desc" : "Number";
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                modelView.Periodicals = modelView.Periodicals.Where(s => s.Name.Contains(searchString)
-                               || s.Annotation.Contains(searchString));
-            }
 
             switch (sortOrder)
             {
@@ -64,6 +72,15 @@ namespace Periodicals_Catalog_MVC.Controllers
                     modelView.Periodicals = modelView.Periodicals.OrderBy(s => s.Name);
                     break;
             }
+
+            int pageNumber = (page ?? 1);
+
+            var currentUser = UserManager.FindById(User.Identity.GetUserId());
+            modelView.PageSetup = currentUser.PageSetup;
+            modelView.PageSetup.PageNumber = pageNumber;
+            modelView.PageSetup.TotalItems = modelView.Periodicals.Count();
+
+            modelView.Periodicals = modelView.Periodicals.Skip((pageNumber - 1) * modelView.PageSetup.PageSize).Take(modelView.PageSetup.PageSize);
 
             return View(modelView);
         }

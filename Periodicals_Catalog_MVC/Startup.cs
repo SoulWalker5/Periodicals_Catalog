@@ -39,20 +39,20 @@ namespace Periodicals_Catalog_MVC
 
                 string userPWD = "9379992Zzzz";
 
-                var chkUser = UserManager.Create(user, userPWD);
+                var createUser = UserManager.Create(user, userPWD);
 
                 //Add default User to Role Admin    
-                if (chkUser.Succeeded)
+                if (createUser.Succeeded)
                 {
                     UserManager.AddToRole(user.Id, "Admin");
                 }
             }
 
-            // creating Creating Manager role     
-            if (!roleManager.RoleExists("Manager"))
+            // creating Creating User role     
+            if (!roleManager.RoleExists("User"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Manager";
+                role.Name = "User";
                 roleManager.Create(role);
             }
 

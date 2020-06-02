@@ -68,9 +68,9 @@ namespace Periodicals_Catalog_MVC.Models
 
     public class RegisterViewModel
     {
-        [Required]
-        [Display(Name = "UserRoles")]
-        public string UserRoles { get; set; }
+        //[Required]
+        [Display(Name = "UserRole")]
+        public string UserRole { get; set; }
 
         [Required]
         [EmailAddress]

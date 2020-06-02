@@ -32,9 +32,9 @@ namespace Periodicals_Catalog_MVC.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -71,7 +71,8 @@ namespace Periodicals_Catalog_MVC.Controllers
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                //PageSetup = pageModel,
             };
             return View(model);
         }
@@ -311,6 +312,34 @@ namespace Periodicals_Catalog_MVC.Controllers
         }
 
         //
+        // GET: /Manage/SetPageSize
+        public ActionResult SetPageSize()
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+
+            return View(user.PageSetup);
+        }
+
+        //
+        // POST: /Manage/SetPageSize
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SetPageSize(PageSetup model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = UserManager.FindById(User.Identity.GetUserId());
+
+            user.PageSetup = model;
+            UserManager.Update(user);
+
+            return RedirectToAction("Index");
+        }
+
+        //
         // GET: /Manage/LinkLoginCallback
         public async Task<ActionResult> LinkLoginCallback()
         {
@@ -334,7 +363,7 @@ namespace Periodicals_Catalog_MVC.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -369,6 +398,12 @@ namespace Periodicals_Catalog_MVC.Controllers
 
             return user;
         }
+        private void SetPageSettings(PageSetup model)
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+
+            user.PageSetup = model;
+        }
 
         private bool HasPhoneNumber()
         {
@@ -391,6 +426,6 @@ namespace Periodicals_Catalog_MVC.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }

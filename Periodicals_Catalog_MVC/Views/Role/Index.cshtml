@@ -19,6 +19,9 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
+                    <td>
+                        @Html.ActionLink("Delete", "Delete", new { name = item.Name })
+                    </td>
                 </tr>
             }
         </tbody>

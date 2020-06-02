@@ -24,19 +24,15 @@ namespace Periodicals_Catalog_MVC.Controllers
         // GET: Search
         public ActionResult Index(string searchString)
         {
-            //var topicBL = _topic.GetAll().ToList();
-            //var topicView = _mapper.Map<IEnumerable<TopicModel>>(topicBL);
             var periodiaclBL = _periodical.GetAll().ToList();
             var periodiaclView = _mapper.Map<IEnumerable<PeriodicalModel>>(periodiaclBL);
 
             if (!String.IsNullOrEmpty(searchString))
             {
-
                 periodiaclView = periodiaclView.Where(d => d.Name.Equals(searchString, StringComparison.CurrentCultureIgnoreCase) || d.Topic.Name.Equals(searchString, StringComparison.CurrentCultureIgnoreCase));
-
             }
 
-            return View(/*"~/Views/Topic/Index.cshtml", "_Layout", */periodiaclView);
+            return View(periodiaclView);
         }
     }
 }
