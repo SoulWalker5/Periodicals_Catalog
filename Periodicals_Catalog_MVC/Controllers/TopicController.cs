@@ -84,20 +84,39 @@ namespace Periodicals_Catalog_MVC.Controllers
         }
         public ActionResult Create()
         {
-            return View();
+            if (User.IsInRole("Admin"))
+            {
+                return View();
+            }
+
+            else
+                return RedirectToAction("Login", "Account");
         }
 
         // POST: Topic/Create
         [HttpPost]
-        public ActionResult Create(TopicModel model)
+        public ActionResult Create(TopicCreateModel model)
         {
+            if (model.UploadImage != null)
+            {
+                string filePath = System.IO.Path.GetFileName(model.UploadImage.FileName);
+
+                model.UploadImage.SaveAs(Server.MapPath("~/Images/Topics/" + filePath));
+                model.ImageName = filePath;
+            }
+
+            else
+            {
+                return View(model);
+            }
+
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            var articleBL = _mapper.Map<TopicBL>(model);
-            _service.Create(articleBL);
+            var modelBL = _mapper.Map<TopicBL>(model);
+            _service.Create(modelBL);
 
             return RedirectToAction("Index");
         }

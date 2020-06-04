@@ -3,6 +3,8 @@
 @{
     ViewBag.Title = "Details";
 }
+
+
 <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="margin-right:30px">
         <div class="info-box-details">
@@ -66,5 +68,10 @@
 </div>
 
 <div class="down_action">
-    @Html.ActionLink("Show All Periodicals", "Index")
+    @Html.ActionLink("Show All Periodicals", "Index") 
+    | 
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Create new Periodical", "Create")
+    }
 </div>

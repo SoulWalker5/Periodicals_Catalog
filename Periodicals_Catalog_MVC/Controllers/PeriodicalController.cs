@@ -63,24 +63,43 @@ namespace Periodicals_Catalog_MVC.Controllers
         }
         public ActionResult Create()
         {
-            DataForDropDown();
+            if (User.IsInRole("Admin"))
+            {
+                DataForDropDown();
 
-            return View();
+                return View();
+            }
+
+            else
+                return RedirectToAction("Login", "Account");
         }
 
         // POST: Periodical/Create
         [HttpPost]
-        public ActionResult Create(PeriodicalModel model)
+        public ActionResult Create(PeriodicalCreateModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                DataForDropDown();
+            DataForDropDown();
 
+            if (model.UploadImage != null)
+            {
+                string filePath = System.IO.Path.GetFileName(model.UploadImage.FileName);
+
+                model.UploadImage.SaveAs(Server.MapPath("~/Images/" + filePath));
+                model.ImageName = filePath;
+            }
+
+            else
+            {
                 return View(model);
             }
 
-            var articleBL = _mapper.Map<PeriodicalBL>(model);
-            _service.Create(articleBL);
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var modelBL = _mapper.Map<PeriodicalBL>(model);
+            _service.Create(modelBL);
 
             return RedirectToAction("Index");
         }
