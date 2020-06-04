@@ -75,10 +75,8 @@ namespace Periodicals_Catalog_MVC.Controllers
 
             int pageNumber = (page ?? 1);
 
-            var currentUser = UserManager.FindById(User.Identity.GetUserId());
-            modelView.PageSetup = currentUser.PageSetup;
-            modelView.PageSetup.PageNumber = pageNumber;
-            modelView.PageSetup.TotalItems = modelView.Periodicals.Count();
+            DefinePageSetup(modelView, pageNumber);
+
 
             modelView.Periodicals = modelView.Periodicals.Skip((pageNumber - 1) * modelView.PageSetup.PageSize).Take(modelView.PageSetup.PageSize);
 
@@ -142,6 +140,31 @@ namespace Periodicals_Catalog_MVC.Controllers
             _service.Remove(model.Id);
 
             return RedirectToAction("Index");
+        }
+
+        /// <summary>
+        /// Methode which define number of elements that are displayed on the page.
+        /// </summary>
+        /// <param name="modelView"> Current model</param>
+        /// <param name="pageNumber"> Current number of page</param>
+        private void DefinePageSetup(TopicModel modelView, int pageNumber)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var currentUser = UserManager.FindById(User.Identity.GetUserId());
+                modelView.PageSetup = currentUser.PageSetup;
+                modelView.PageSetup.PageNumber = pageNumber;
+                modelView.PageSetup.TotalItems = modelView.Periodicals.Count();
+            }
+
+            else
+            {
+                modelView.PageSetup = new PageSetup
+                {
+                    PageNumber = pageNumber,
+                    TotalItems = modelView.Periodicals.Count()
+                };
+            }
         }
     }
 }

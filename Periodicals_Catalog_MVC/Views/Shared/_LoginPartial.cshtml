@@ -25,10 +25,8 @@
         </div>
     }
 }
+
 else
 {
-    <ul class="nav navbar-nav navbar-right top-menu">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class ="logo" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class ="logo" })</li>
-    </ul>
+    @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "login_top_menu_right"})
 }

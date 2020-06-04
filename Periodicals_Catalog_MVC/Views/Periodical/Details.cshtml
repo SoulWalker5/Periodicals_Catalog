@@ -3,58 +3,68 @@
 @{
     ViewBag.Title = "Details";
 }
-
-<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <div>
-        <img class="img-details" src="~/Images/@Model.ImageName" />
+<div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="margin-right:30px">
+        <div class="info-box-details">
+            <img class="img-details" src="~/Images/@Model.ImageName" />
+        </div>
     </div>
-    <div class="col-lg-21">
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
+    <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+        <div class="info-box-details">
+            <div class="row">
+                <ul style="padding-left:initial">
+                    <li>
+                        <span class="display_title">
+                            @Html.DisplayNameFor(model => model.Name):
+                        </span>
+                        <span class="display_data">
+                            @Html.DisplayFor(model => model.Name)
+                        </span>
+                    </li>
+                    <li>
+                        <span class="display_title">
+                            @Html.DisplayNameFor(model => model.Period):
+                        </span>
 
-            <dd>
-                @Html.DisplayFor(model => model.Name)
-            </dd>
+                        <span class="display_data">
+                            @Html.DisplayFor(model => model.Period)
+                        </span>
+                    </li>
+                    <li>
+                        <span class=" display_title">
+                            @Html.DisplayName("Image name"):
+                        </span>
+                        <span class="display_data">
+                            @Html.DisplayFor(model => model.ImageName)
+                        </span>
+                    </li>
+                    <li>
+                        <span class="display_title">
+                            @Html.DisplayName("Number of publications"):
+                        </span>
+                        <span class="display_data">
+                            @Html.DisplayFor(model => model.NumberOfPublications)
+                        </span>
+                    </li>
+                    <li>
+                        <span class="display_title">
+                            @Html.DisplayNameFor(model => model.Annotation):
+                        </span>
+                    </li>
+                    <li>
+                        <span class="display_data">
+                            @Html.DisplayFor(model => model.Annotation)
+                        </span>
+                    </li>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Period)
-            </dt>
+                </ul>
 
-            <dd>
-                @Html.DisplayFor(model => model.Period)
-            </dd>
+            </div>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.ImageName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.ImageName)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.NumberOfPublications)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.NumberOfPublications)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Annotation)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Annotation)
-            </dd>
-
-        </dl>
+        </div>
     </div>
 </div>
 
-<div id="footer_details">
-    <p>
-        @Html.ActionLink("Show All Periodicals", "Index")
-    </p>
+<div class="down_action">
+    @Html.ActionLink("Show All Periodicals", "Index")
 </div>

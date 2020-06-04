@@ -93,11 +93,37 @@ table tr th {
     color: #00a0df !important;
 }
 
+.display_title {
+    color: black;
+    font-size: 18px;
+    font-weight: bolder;
+}
+
+.display_data {
+    margin-left: 15px;
+    color: black;
+    font-size: 18px;
+}
+
+.down_action {
+    padding-left: 35px;
+    font-size: larger;
+    padding-bottom: 20px
+}
 
 
 /*login page*/
 
-
+.login_top_menu_right {
+    float: right;
+    padding-left: 15px;
+    /*margin-right: 5px;*/
+    font-size: 22px;
+    font-weight: 300;
+    color: #fed189;
+    margin-top: 15px;
+    text-transform: uppercase;
+}
 
 .login-body {
     background-color: #f1f2f7;
@@ -1174,6 +1200,13 @@ div[data-role="editor-toolbar"] {
 /* .info-box
 
 =================================================================== */
+
+
+.info-box-details {
+    min-height: 140px;
+    margin-bottom: 30px;
+    padding: 20px;
+}
 
 .info-box {
     text-align: center;
@@ -5114,6 +5147,9 @@ ul.amounts li {
 .panel-heading .nav > li.active > a, .panel-heading .nav > li.active > a:hover, .panel-heading .nav > li.active > a:focus {
     border-width: 0;
     border-radius: 0;
+}
+.panel-heading .nav > li > span {
+    color: #d0d8df;
 }
 
 

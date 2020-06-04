@@ -37,7 +37,8 @@ namespace Periodicals_Catalog_MVC
                "~/Scripts/jquery.nicescroll.js",
                "~/Scripts/scripts.js",
                "~/Scripts/jquery.slimscroll.min.js",
-               "~/Scripts/jsButtonToTop.js"
+               "~/Scripts/jsButtonToTop.js",
+               "~/Scripts/jsButtonToBottom.js"
                ));
         }
     }

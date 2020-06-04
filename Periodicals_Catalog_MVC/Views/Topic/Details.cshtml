@@ -8,14 +8,20 @@
 <section class="panel">
     <header class="panel-heading tab-bg-primary">
         <ul class="nav nav-tabs">
-            <li class="">
-                @Html.ActionLink("Create new Topic", "Create")
+            @if (User.IsInRole("Admin"))
+            {
+                <li class="">
+                    @Html.ActionLink("Create new Topic", "Create")
+                </li>
+            }
+            <li style="border:none">
+                <span> Sort by:</span>
             </li>
             <li class="">
                 @Html.ActionLink("Name", "Details/" + Model.Id, new { sortOrder = ViewBag.NameSortParm })
             </li>
             <li>
-                <a href="#bottom">Jump bottom</a>
+                <a onclick="bottomFunction()">Go to bottom</a>
             </li>
         </ul>
     </header>
@@ -24,31 +30,38 @@
     @{
         foreach (var periodical in Model.Periodicals)
         {
+            <div class="row" style="border-bottom:solid">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <a href="~/Periodical/Details/@periodical.Id">
+                        <img class="img-details" src="~/Images/@periodical.ImageName" />
 
-            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
-                <a href="~/Periodical/Details/@periodical.Id">
-                    <img class="img-details" src="~/Images/@periodical.ImageName" />
-                    <div class="col-lg-21">@periodical.Name </div>
-                    <div class="col-lg-13">
+                    </a>
+                </div>
+                <div class="col-lg-21 col-md-5 col-sm-12 col-xs-12" style="font-size:18px; font-weight: bolder; padding-bottom:initial">
+                    <a href="~/Periodical/Details/@periodical.Id">
+                        @periodical.Name
+                    </a>
+                </div>
+                <div class="col-lg-13 col-md-4 col-sm-12 col-xs-12">
+                    <a href="~/Periodical/Details/@periodical.Id">
                         @if (periodical.Annotation.Length < 200)
                         {
                             <div>@periodical.Annotation</div>
                         }
                         else
                         {
-                            <div>@periodical.Annotation.Substring(0, 200) ...  </div>
+                            <span>@periodical.Annotation.Substring(0, 200) ...  </span>
                         }
-                    </div>
-                </a>
+                        </a>
+                </div>
             </div>
         }
     }
 </section>
-@*<section class="panel">*@
-    <div class="row text-center">
-        <ul class="pagination">
-            @Html.PageLinks(Model.PageSetup, x => Url.Action("Details/" + Model.Id, new { page = x }))
-        </ul>
-    </div>
-@*</section>*@
+
+<div class="row text-center">
+    <ul class="pagination">
+        @Html.PageLinks(Model.PageSetup, x => Url.Action("Details/" + Model.Id, new { page = x }))
+    </ul>
+</div>
 

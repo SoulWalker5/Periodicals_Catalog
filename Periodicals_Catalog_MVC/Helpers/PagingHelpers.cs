@@ -19,13 +19,13 @@ namespace Periodicals_Catalog_MVC.Helpers
                 TagBuilder tag = new TagBuilder("a");
                 tag.MergeAttribute("href", pageUrl(i));
                 tag.InnerHtml = i.ToString();
-                // если текущая страница, то выделяем ее,
-                // например, добавляя класс
                 tag.AddCssClass("btn btn-default");
+
                 if (i == pageInfo.PageNumber)
                 {
                     tag.AddCssClass("btn btn-primary");
                 }
+
                 result.Append(tag.ToString());
             }
 
