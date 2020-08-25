@@ -124,16 +124,24 @@ namespace Periodicals_Catalog_MVC.Controllers
         public ActionResult Edit(int id)
         {
             var modelBL = _service.FindById(id);
-            var modelView = _mapper.Map<PeriodicalModel>(modelBL);
+            var modelView = _mapper.Map<TopicModel>(modelBL);
 
             return View(modelView);
         }
 
         // POST: Topic/Edit/5
         [HttpPost]
-        public ActionResult Edit(TopicModel model)
+        public ActionResult Edit(TopicCreateModel model)
         {
-            if (!ModelState.IsValid)
+            if (model.UploadImage != null && ModelState.IsValid)
+            {
+                string filePath = System.IO.Path.GetFileName(model.UploadImage.FileName);
+
+                model.UploadImage.SaveAs(Server.MapPath("~/Images/Topics/" + filePath));
+                model.ImageName = filePath;
+            }
+
+            else
             {
                 return View(model);
             }

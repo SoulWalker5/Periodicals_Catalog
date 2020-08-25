@@ -78,9 +78,7 @@ namespace Periodicals_Catalog_MVC.Controllers
         [HttpPost]
         public ActionResult Create(PeriodicalCreateModel model)
         {
-            DataForDropDown();
-
-            if (model.UploadImage != null)
+            if (model.UploadImage != null && ModelState.IsValid)
             {
                 string filePath = System.IO.Path.GetFileName(model.UploadImage.FileName);
 
@@ -90,11 +88,8 @@ namespace Periodicals_Catalog_MVC.Controllers
 
             else
             {
-                return View(model);
-            }
+                DataForDropDown();
 
-            if (!ModelState.IsValid)
-            {
                 return View(model);
             }
 
@@ -116,8 +111,16 @@ namespace Periodicals_Catalog_MVC.Controllers
 
         // POST: Periodical/Edit/5
         [HttpPost]
-        public ActionResult Edit(PeriodicalModel model)
+        public ActionResult Edit(PeriodicalCreateModel model)
         {
+            if (model.UploadImage != null)
+            {
+                string filePath = System.IO.Path.GetFileName(model.UploadImage.FileName);
+
+                model.UploadImage.SaveAs(Server.MapPath("~/Images/" + filePath));
+                model.ImageName = filePath;
+            }
+
             if (!ModelState.IsValid)
             {
                 DataForDropDown();

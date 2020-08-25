@@ -26,6 +26,7 @@
                         {
                             <input id="SearchString" name="SearchString" class="form-control" placeholder="Search" type="text" autocomplete="on">
                         }
+                        <ul class="list-group" id="result"></ul>
                     </li>
                 </ul>
                 <!--  search form end -->
@@ -48,7 +49,7 @@
         <section id="main-content">
             <section class="wrapper">
                 @RenderBody()
-                
+
                 <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
             </section>
 

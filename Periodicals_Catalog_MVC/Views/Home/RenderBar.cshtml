@@ -4,7 +4,7 @@
 @foreach (var topic in Model)
 {
     <li class="sub-menu">
-        <a href="javascript:;" class="">
+        <a class="">
             <span class="menu-arrow arrow_carrot-right"></span>
             @topic.Name
         </a>
@@ -19,3 +19,5 @@
         </ul>
     </li>
 }
+
+@Scripts.Render("~/bundles/jsscripts")

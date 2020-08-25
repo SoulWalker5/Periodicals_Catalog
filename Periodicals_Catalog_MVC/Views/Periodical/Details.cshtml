@@ -68,10 +68,15 @@
 </div>
 
 <div class="down_action">
-    @Html.ActionLink("Show All Periodicals", "Index") 
-    | 
+    @Html.ActionLink("Show All Periodicals", "Index")
+    
     @if (User.IsInRole("Admin"))
     {
-        @Html.ActionLink("Create new Periodical", "Create")
+        <span style="padding-left: 15px">
+            @Html.ActionLink("Create new Periodical", "Create")
+        </span>
+        <span style="padding-left: 15px">
+            @Html.ActionLink("Edit", "Edit/" + Model.Id)
+        </span>
     }
 </div>
