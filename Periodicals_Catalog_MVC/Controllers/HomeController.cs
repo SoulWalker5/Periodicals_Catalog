@@ -24,9 +24,9 @@ namespace Periodicals_Catalog_MVC.Controllers
             _mapper = mapper;
             _periodical = periodical;
         }
-        public RedirectResult Index()
+        public ActionResult Index()
         {
-            return RedirectPermanent("/Topic/Index");
+            return RedirectToAction ("Index", "Topic");
         }
 
         public ActionResult About()

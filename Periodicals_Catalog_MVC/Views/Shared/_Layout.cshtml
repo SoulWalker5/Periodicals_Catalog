@@ -22,9 +22,9 @@
                 <!--  search form start -->
                 <ul class="nav top-menu">
                     <li>
-                        @using (Html.BeginForm("Index", "Search", new { @class = "navbar-form" }))
+                        @using (Html.BeginForm("Index", "Search", FormMethod.Post, new { @class = "navbar-form", id = "form" }))
                         {
-                            <input id="SearchString" name="SearchString" class="form-control" placeholder="Search" type="text" autocomplete="on">
+                            <input id="SearchString" name="SearchString" class="form-control" placeholder="Search" type="text" autocomplete="off">
                         }
                         <ul class="list-group" id="result"></ul>
                     </li>
@@ -47,7 +47,9 @@
         <!-- sidebar menu end-->
 
         <section id="main-content">
+
             <section class="wrapper">
+
                 @RenderBody()
 
                 <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>

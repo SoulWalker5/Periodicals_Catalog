@@ -4600,8 +4600,9 @@ a.thumbnail:focus {
   list-style: none;
 }
 .list-group {
-  margin-bottom: 20px;
-  padding-left: 0;
+    margin-bottom: 20px;
+    padding-left: 0;
+    position: absolute;
 }
 .list-group-item {
   position: relative;
@@ -4609,6 +4610,7 @@ a.thumbnail:focus {
   padding: 10px 15px;
   margin-bottom: -1px;
   background-color: #ffffff;
+  color: black;
   border: 1px solid #d7d7d7;
 }
 .list-group-item:first-child {
