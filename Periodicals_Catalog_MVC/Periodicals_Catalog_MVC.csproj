@@ -453,6 +453,7 @@
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Manage\SetPageSize.cshtml" />
     <Content Include="Views\Role\Delete.cshtml" />
+    <Content Include="Views\Shared\_Pagination.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

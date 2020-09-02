@@ -17,7 +17,5 @@ namespace Periodicals_Catalog_MVC.Models
         public string ImageName { get; set; }
 
         public IEnumerable<PeriodicalModel> Periodicals { get; set; }
-
-        public PageSetup PageSetup { get; set; }
     }
 }

@@ -1,0 +1,22 @@
+﻿@model Periodicals_Catalog_MVC.Models.PageSetup
+@using Periodicals_Catalog_MVC.Helpers
+
+@{var hz = Request.CurrentExecutionFilePath.Split('/');
+    string URL = "";
+    if (hz.Length == 2)
+    {
+        URL = "";
+    }
+
+    if (hz.Length == 4)
+    {
+        string[] real = new string[] { hz[2], hz[3] };
+        URL = "/" + string.Join("/", real);
+    }
+}
+
+<div class="row text-center">
+    <ul class="pagination">
+        @Html.PageLinks(Model, x => Url.Action(URL, new { searchString = (string)ViewData["SearchString"], page = x }))
+    </ul>
+</div>

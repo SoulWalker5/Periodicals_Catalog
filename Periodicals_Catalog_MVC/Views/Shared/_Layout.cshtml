@@ -22,7 +22,7 @@
                 <!--  search form start -->
                 <ul class="nav top-menu">
                     <li>
-                        @using (Html.BeginForm("Index", "Search", FormMethod.Post, new { @class = "navbar-form", id = "form" }))
+                        @using (Html.BeginForm("Index", "Search", new { }, FormMethod.Post, new { @class = "navbar-form", id = "form" }))
                         {
                             <input id="SearchString" name="SearchString" class="form-control" placeholder="Search" type="text" autocomplete="off">
                         }

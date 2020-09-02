@@ -63,19 +63,19 @@ namespace Periodicals_Catalog_MVC.Controllers
         public ActionResult Index(string searchString, int? page)
         {
             var periodiaclBL = _periodical.GetAll().ToList();
-            var periodicalView = _mapper.Map<IEnumerable<PeriodicalModel>>(periodiaclBL);
+            var modelView = _mapper.Map<IEnumerable<PeriodicalModel>>(periodiaclBL);
+            
+            modelView = modelView.Where(d => d.Name.ToLower().Contains(searchString.ToLower()));
 
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                periodicalView.Where(d => d.Name.ToLower().Contains(searchString) || d.Topic.Name.ToLower().Contains(searchString));
+            int pageNumber = (page ?? 1);
 
-                int pageNumber = (page ?? 1);
+            var pageSetup = DefinePageSetup(modelView, pageNumber);
+            ViewData["PageSetup"] = pageSetup;
+            ViewData["SearchString"] = searchString;
 
-                DefinePageSetup(periodicalView, pageNumber);
+            modelView = modelView.Skip((pageNumber - 1) * pageSetup.PageSize).Take(pageSetup.PageSize);
 
-            }
-
-            return View(periodicalView);
+            return View(modelView);
         }
 
         /// <summary>
@@ -83,24 +83,24 @@ namespace Periodicals_Catalog_MVC.Controllers
         /// </summary>
         /// <param name="modelView"> Current model</param>
         /// <param name="pageNumber"> Current number of page</param>
-        private void DefinePageSetup(IEnumerable<PeriodicalModel> modelView, int pageNumber)
+        private PageSetup DefinePageSetup(IEnumerable<PeriodicalModel> modelView, int pageNumber)
         {
             if (User.Identity.IsAuthenticated)
             {
                 var currentUser = UserManager.FindById(User.Identity.GetUserId());
 
-                modelView.Select(x => x.PageSetup = currentUser.PageSetup);
-                modelView.Select(x => x.PageSetup.PageNumber = pageNumber);
-                modelView.Select(x => x.PageSetup.TotalItems = modelView.Count());
+                return currentUser.PageSetup;
             }
 
             else
             {
-                modelView.Select(x => x.PageSetup = new PageSetup
+                var pageSetup = new PageSetup
                 {
                     PageNumber = pageNumber,
                     TotalItems = modelView.Count()
-                });
+                };
+
+                return pageSetup;
             }
         }
     }

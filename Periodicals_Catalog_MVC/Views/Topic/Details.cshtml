@@ -1,5 +1,5 @@
 ﻿@model Periodicals_Catalog_MVC.Models.TopicModel
-@using Periodicals_Catalog_MVC.Helpers
+@using Periodicals_Catalog_MVC.Models
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -52,16 +52,13 @@
                         {
                             <span>@periodical.Annotation.Substring(0, 200) ...  </span>
                         }
-                        </a>
+                    </a>
                 </div>
             </div>
         }
     }
 </section>
 
-<div class="row text-center">
-    <ul class="pagination">
-        @Html.PageLinks(Model.PageSetup, x => Url.Action("Details/" + Model.Id, new { page = x }))
-    </ul>
-</div>
+@{var pageSetup = (PageSetup)ViewData["PageSetup"];}
 
+@Html.Partial("_Pagination", pageSetup)

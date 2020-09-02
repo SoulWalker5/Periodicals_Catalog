@@ -1,19 +1,15 @@
 ﻿@model IEnumerable<Periodicals_Catalog_MVC.Models.PeriodicalModel>
-@using Periodicals_Catalog_MVC.Helpers
+@using Periodicals_Catalog_MVC.Models
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+
 <section class="panel">
     <header class="panel-heading tab-bg-primary">
         <ul class="nav nav-tabs">
-            @if (User.IsInRole("Admin"))
-            {
-                <li class="">
-                    @Html.ActionLink("Create new Topic", "Create")
-                </li>
-            }
             <li>
                 <a onclick="bottomFunction()">Go to bottom</a>
             </li>
@@ -21,73 +17,39 @@
     </header>
 </section>
 <section class="container">
-    @{
-        foreach (var periodical in Model)
-        {
-            <div class="row" style="border-bottom:solid">
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <a href="~/Periodical/Details/@periodical.Id">
-                        <img class="img-details" src="~/Images/@periodical.ImageName" />
-                    </a>
-                </div>
-                <div class="col-lg-21 col-md-5 col-sm-12 col-xs-12" style="font-size:18px; font-weight: bolder; padding-bottom:initial">
-                    <a href="~/Periodical/Details/@periodical.Id">
-                        @periodical.Name
-                    </a>
-                </div>
-                <div class="col-lg-13 col-md-4 col-sm-12 col-xs-12">
-                    <a href="~/Periodical/Details/@periodical.Id">
-                        @if (periodical.Annotation.Length < 200)
-                        {
-                            <div>@periodical.Annotation</div>
-                        }
-                        else
-                        {
-                            <span>@periodical.Annotation.Substring(0, 200) ...  </span>
-                        }
-                    </a>
-                </div>
+
+    @foreach (var periodical in Model)
+    {
+        <div class="row" style="border-bottom:solid">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <a href="~/Periodical/Details/@periodical.Id">
+                    <img class="img-details" src="~/Images/@periodical.ImageName" />
+                </a>
             </div>
-        }
+            <div class="col-lg-21 col-md-5 col-sm-12 col-xs-12" style="font-size:18px; font-weight: bolder; padding-bottom:initial">
+                <a href="~/Periodical/Details/@periodical.Id">
+                    @periodical.Name
+                </a>
+            </div>
+            <div class="col-lg-13 col-md-4 col-sm-12 col-xs-12">
+                <a href="~/Periodical/Details/@periodical.Id">
+                    @if (periodical.Annotation.Length < 200)
+                    {
+                        <div>@periodical.Annotation</div>
+                    }
+                    else
+                    {
+                        <span>@periodical.Annotation.Substring(0, 200) ...  </span>
+                    }
+                </a>
+            </div>
+        </div>
     }
 </section>
 
-@{var hza = Model.Select(x => x.PageSetup).First();}
-@{var hz = Model.Select(x => x.Id);}
+@{var pageSetup = (PageSetup)ViewData["PageSetup"];}
 
-<div class="row text-center">
-    <ul class="pagination">
-        @Html.PageLinks(hza, x => Url.Action("Details/" + @hz, new { page = x }))
-    </ul>
-</div>
+@Html.Partial("_Pagination", pageSetup)
 
 
 
-@*@model IEnumerable<Periodicals_Catalog_MVC.Models.PeriodicalModel>
-
-    @{
-        ViewBag.Title = "Index";
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    }
-
-    <body>
-        <table class="table table-hover personal-task">
-            <tbody>
-                @foreach (var periodical in Model)
-                {
-                    <tr>
-                        <td>
-                            Periodical:
-                            @Html.ActionLink(periodical.Name, "Details/" + periodical.Id, "Periodical")
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Topic:
-                            @Html.ActionLink(periodical.Topic.Name, "Details/" + periodical.Topic.Id, "Topic")
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </body>*@

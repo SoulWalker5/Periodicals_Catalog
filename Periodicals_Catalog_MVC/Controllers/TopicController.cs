@@ -75,10 +75,10 @@ namespace Periodicals_Catalog_MVC.Controllers
 
             int pageNumber = (page ?? 1);
 
-            DefinePageSetup(modelView, pageNumber);
+            var pageSetup = DefinePageSetup(modelView, pageNumber);
+            ViewData["PageSetup"] = pageSetup;
 
-
-            modelView.Periodicals = modelView.Periodicals.Skip((pageNumber - 1) * modelView.PageSetup.PageSize).Take(modelView.PageSetup.PageSize);
+            modelView.Periodicals = modelView.Periodicals.Skip((pageNumber - 1) * pageSetup.PageSize).Take(pageSetup.PageSize);
 
             return View(modelView);
         }
@@ -169,28 +169,37 @@ namespace Periodicals_Catalog_MVC.Controllers
             return RedirectToAction("Index");
         }
 
+
+        public ActionResult Partial()
+        {
+
+
+            return PartialView("_Pagination");
+        }
+
         /// <summary>
         /// Methode which define number of elements that are displayed on the page.
         /// </summary>
         /// <param name="modelView"> Current model</param>
         /// <param name="pageNumber"> Current number of page</param>
-        private void DefinePageSetup(TopicModel modelView, int pageNumber)
+        private PageSetup DefinePageSetup(TopicModel modelView, int pageNumber)
         {
             if (User.Identity.IsAuthenticated)
             {
                 var currentUser = UserManager.FindById(User.Identity.GetUserId());
-                modelView.PageSetup = currentUser.PageSetup;
-                modelView.PageSetup.PageNumber = pageNumber;
-                modelView.PageSetup.TotalItems = modelView.Periodicals.Count();
+
+                return currentUser.PageSetup;
             }
 
             else
             {
-                modelView.PageSetup = new PageSetup
+                var pageSetup = new PageSetup
                 {
                     PageNumber = pageNumber,
                     TotalItems = modelView.Periodicals.Count()
                 };
+
+                return pageSetup;
             }
         }
     }
