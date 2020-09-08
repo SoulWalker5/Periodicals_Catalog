@@ -6,9 +6,9 @@ using System.Web;
 
 namespace Periodicals_Catalog_MVC.Models
 {
-    public class PeriodicalCreateModel : PeriodicalModel
-    {
-        [Required]
-        public HttpPostedFileBase UploadImage { get; set; }
-    }
+    //public class PeriodicalCreateModel : PeriodicalModel
+    //{
+    //    [Required]
+    //    public HttpPostedFileBase UploadImage { get; set; }
+    //}
 }

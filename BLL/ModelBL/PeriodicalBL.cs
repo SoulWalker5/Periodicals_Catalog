@@ -15,6 +15,7 @@ namespace BLL.ModelBL
         public int NumberOfEdition { get; set; } // Number of periodical 
         public int NumberOfPublications { get; set; } // All number of periodical
         public string Annotation { get; set; }
+        public int TopicId { get; set; }
 
         public virtual TopicBL Topic { get; set; }
     }

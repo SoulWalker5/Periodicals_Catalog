@@ -11,11 +11,11 @@ namespace Periodicals_Catalog_MVC.Models
     {
         public int Id { get; set; }
 
-        [Required]
         public string Name { get; set; }
 
         public string ImageName { get; set; }
 
         public IEnumerable<PeriodicalModel> Periodicals { get; set; }
+        public HttpPostedFileBase UploadImage { get; set; }
     }
 }

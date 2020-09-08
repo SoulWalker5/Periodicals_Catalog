@@ -1,6 +1,8 @@
-﻿using DAL.Interface;
+﻿using DAL.Entity;
+using DAL.Interface;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
@@ -19,6 +21,7 @@ namespace DAL.Repository
         {
             _ctx.Set<T>().Add(item);
             _ctx.SaveChanges();
+
         }
 
         public T FindById(int id)
@@ -31,7 +34,6 @@ namespace DAL.Repository
         public IEnumerable<T> GetAll()
         {
             var searachRes = _ctx.Set<T>();
-            //var searachRes = _ctx.Set<T>().AsNoTracking().ToList();
 
             return searachRes;
         }

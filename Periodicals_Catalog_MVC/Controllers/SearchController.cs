@@ -49,7 +49,7 @@ namespace Periodicals_Catalog_MVC.Controllers
             var periodiaclBL = _periodical.GetAll().ToList();
             var periodiaclView = _mapper.Map<IEnumerable<PeriodicalModel>>(periodiaclBL);
 
-            var filteredData = periodiaclView.Select(c => new { c.Name, c.ImageName });
+            var filteredData = periodiaclView.Select(c => new { c.Id, c.Name, c.ImageName });
 
             var listOfData = JsonConvert.SerializeObject(filteredData, Formatting.None,
                  new JsonSerializerSettings()
@@ -64,7 +64,7 @@ namespace Periodicals_Catalog_MVC.Controllers
         {
             var periodiaclBL = _periodical.GetAll().ToList();
             var modelView = _mapper.Map<IEnumerable<PeriodicalModel>>(periodiaclBL);
-            
+
             modelView = modelView.Where(d => d.Name.ToLower().Contains(searchString.ToLower()));
 
             int pageNumber = (page ?? 1);

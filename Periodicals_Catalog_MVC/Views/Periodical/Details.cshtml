@@ -68,15 +68,15 @@
 </div>
 
 <div class="down_action">
-    @Html.ActionLink("Show All Periodicals", "Index")
-    
+    @Html.ActionLink("Show All Periodicals", "Index", null, new { @class = "btn btn-primary", role = "button" })
+
     @if (User.IsInRole("Admin"))
     {
         <span style="padding-left: 15px">
-            @Html.ActionLink("Create new Periodical", "Create")
+            @Html.ActionLink("Create new Periodical", "Create", null, new { @class = "btn btn-primary", role = "button" })
         </span>
         <span style="padding-left: 15px">
-            @Html.ActionLink("Edit", "Edit/" + Model.Id)
+            @Html.ActionLink("Edit", "Edit/" + Model.Id, null, new { @class = "btn btn-warning", role = "button" })
         </span>
     }
 </div>

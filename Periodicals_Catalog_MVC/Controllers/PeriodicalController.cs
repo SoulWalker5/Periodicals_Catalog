@@ -12,27 +12,30 @@ namespace Periodicals_Catalog_MVC.Controllers
 {
     public class PeriodicalController : Controller
     {
-        private readonly IPeriodicalService _service;
+        private readonly IPeriodicalService _periodical;
+        private readonly ITopicService _topic;
         private readonly IMapper _mapper;
-        public PeriodicalController(IPeriodicalService service, IMapper mapper)
+        public PeriodicalController(IPeriodicalService periodical, IMapper mapper, ITopicService topic)
         {
-            _service = service;
+            _topic = topic;
+            _periodical = periodical;
             _mapper = mapper;
         }
 
         // GET: Periodical
         public ActionResult Index(string sortOrder)
         {
-            var modelBL = _service.GetAll().ToList();
+            var modelBL = _periodical.GetAll().ToList();
             var modelView = _mapper.Map<IEnumerable<PeriodicalModel>>(modelBL);
 
             if (!User.IsInRole("Admin"))
             {
-                modelView = modelView.Where(p => !p.Topic.Name.Contains("XXX"));
+                var hz = _topic.GetAll().Where(x => x.Name.Contains("XXX")).FirstOrDefault();
+                modelView = modelView.Where(p => p.TopicId != hz.Id);
             }
 
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.NumberSortParm = sortOrder == "Number" ? "number_desc" : "Number";
+            //ViewBag.NumberSortParm = sortOrder == "Number" ? "number_desc" : "Number";
 
             switch (sortOrder)
             {
@@ -56,7 +59,7 @@ namespace Periodicals_Catalog_MVC.Controllers
         // GET: Periodical/Details/5
         public ActionResult Details(int id)
         {
-            var modelBL = _service.FindById(id);
+            var modelBL = _periodical.FindById(id);
             var modelView = _mapper.Map<PeriodicalModel>(modelBL);
 
             return View(modelView);
@@ -76,7 +79,7 @@ namespace Periodicals_Catalog_MVC.Controllers
 
         // POST: Periodical/Create
         [HttpPost]
-        public ActionResult Create(PeriodicalCreateModel model)
+        public ActionResult Create(PeriodicalModel model)
         {
             if (model.UploadImage != null && ModelState.IsValid)
             {
@@ -94,14 +97,14 @@ namespace Periodicals_Catalog_MVC.Controllers
             }
 
             var modelBL = _mapper.Map<PeriodicalBL>(model);
-            _service.Create(modelBL);
+            _periodical.Create(modelBL);
 
             return RedirectToAction("Index");
         }
 
         public ActionResult Edit(int id)
         {
-            var modelBL = _service.FindById(id);
+            var modelBL = _periodical.FindById(id);
             var modelView = _mapper.Map<PeriodicalModel>(modelBL);
 
             DataForDropDown();
@@ -111,7 +114,7 @@ namespace Periodicals_Catalog_MVC.Controllers
 
         // POST: Periodical/Edit/5
         [HttpPost]
-        public ActionResult Edit(PeriodicalCreateModel model)
+        public ActionResult Edit(PeriodicalModel model)
         {
             if (model.UploadImage != null)
             {
@@ -129,17 +132,15 @@ namespace Periodicals_Catalog_MVC.Controllers
             }
 
             var modelBL = _mapper.Map<PeriodicalBL>(model);
-            _service.Update(modelBL);
+            _periodical.Update(modelBL);
 
             return RedirectToAction("Index");
         }
 
         public ActionResult Delete(int id)
         {
-            var modelBL = _service.FindById(id);
+            var modelBL = _periodical.FindById(id);
             var modelView = _mapper.Map<PeriodicalModel>(modelBL);
-
-            DataForDropDown();
 
             return View(modelView);
         }
@@ -148,15 +149,15 @@ namespace Periodicals_Catalog_MVC.Controllers
         [HttpPost]
         public ActionResult Delete(PeriodicalModel model)
         {
-            _service.Remove(model.Id);
+            _periodical.Remove(model.Id);
 
             return RedirectToAction("Index");
         }
 
         public void DataForDropDown()
         {
-            ViewBag.Period = new SelectList(_service.GetAll().Select(x => x.Period).Distinct(), "Period");
-            ViewBag.Topic = new SelectList(_service.GetAll().Select(x => x.Topic).Select(c => c.Name), "Topic");
-        } 
+            ViewData["Period"] = new SelectList(_periodical.GetAll().Select(x => x.Period).Distinct(), "Period");
+            ViewData["Topic"] = new SelectList(_topic.GetAll(), "Id", "Name");
+        }
     }
 }

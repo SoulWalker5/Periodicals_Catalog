@@ -85,9 +85,7 @@ namespace Periodicals_Catalog_MVC.Controllers
         public ActionResult Create()
         {
             if (User.IsInRole("Admin"))
-            {
                 return View();
-            }
 
             else
                 return RedirectToAction("Login", "Account");
@@ -95,7 +93,7 @@ namespace Periodicals_Catalog_MVC.Controllers
 
         // POST: Topic/Create
         [HttpPost]
-        public ActionResult Create(TopicCreateModel model)
+        public ActionResult Create(TopicModel model)
         {
             if (model.UploadImage != null)
             {
@@ -131,7 +129,7 @@ namespace Periodicals_Catalog_MVC.Controllers
 
         // POST: Topic/Edit/5
         [HttpPost]
-        public ActionResult Edit(TopicCreateModel model)
+        public ActionResult Edit(TopicModel model)
         {
             if (model.UploadImage != null && ModelState.IsValid)
             {

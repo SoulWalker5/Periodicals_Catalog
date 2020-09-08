@@ -6,9 +6,9 @@ using System.Web;
 
 namespace Periodicals_Catalog_MVC.Models
 {
-    public class TopicCreateModel : TopicModel
-    {
-        [Required]
-        public HttpPostedFileBase UploadImage { get; set; }
-    }
+    //public class TopicCreateModel : TopicModel
+    //{
+    //    [Required]
+    //    public HttpPostedFileBase UploadImage { get; set; }
+    //}
 }

@@ -13,6 +13,12 @@
                 <li class="">
                     @Html.ActionLink("Create new Topic", "Create")
                 </li>
+                <li class="">
+                    @Html.ActionLink("Edit", "Edit/" + Model.Id)
+                </li>
+                <li class="">
+                    @Html.ActionLink("Delete", "Delete/" + Model.Id)
+                </li>
             }
             <li style="border:none">
                 <span> Sort by:</span>

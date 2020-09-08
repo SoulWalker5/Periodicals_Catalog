@@ -45,16 +45,16 @@
 
                     <td>
                         <span>
-                            @Html.ActionLink("Details", "Details", new { id = item.Id })
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-primary", role = "button" })
                         </span>
 
                         @if (User.IsInRole("Admin"))
                         {
                             <span style="padding-left: 15px">
-                                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning", role = "button" })
                             </span>
                             <span style="padding-left: 15px">
-                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger", role = "button" })
                             </span>
                         }
                     </td>

@@ -16,7 +16,6 @@ namespace Periodicals_Catalog_MVC.Models
         [Required]
         public string Period { get; set; } // 1 per mounth
 
-        [Required]
         public string ImageName { get; set; }
 
         public int NumberOfEdition { get; set; } // Number of periodical 
@@ -27,6 +26,9 @@ namespace Periodicals_Catalog_MVC.Models
         [Required]
         public string Annotation { get; set; }
 
+        public int TopicId { get; set; }
         public TopicModel Topic { get; set; }
+        public HttpPostedFileBase UploadImage { get; set; }
+
     }
 }
