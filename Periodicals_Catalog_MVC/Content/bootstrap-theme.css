@@ -110,7 +110,7 @@ img {
 }
 .img-details {
     height: 500px;
-    width: 300px;
+    width: 350px;
 }
 
 svg:not(:root) {
@@ -763,19 +763,6 @@ pre code {
     padding-top: 15px;
     padding-right: 15px;
     padding-bottom: 25px;
-}
-.col-lg-13 {
-    position: relative;
-    min-height: 1px;
-    padding-left: 15px;
-    padding-right: 15px;
-}
-.col-lg-21 {
-    position: relative;
-    min-height: 1px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 10px;
 }
 .col-xs-1,
 .col-xs-2,

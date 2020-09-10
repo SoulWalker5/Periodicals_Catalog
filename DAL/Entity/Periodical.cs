@@ -15,8 +15,10 @@ namespace DAL.Entity
         public int NumberOfEdition { get; set; } // Number of periodical 
         public int NumberOfPublications { get; set; } // All number of periodical
         public string Annotation { get; set; }
+
         public int TopicId { get; set; }
 
         public virtual Topic Topic { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

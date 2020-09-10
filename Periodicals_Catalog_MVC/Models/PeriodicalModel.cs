@@ -27,7 +27,10 @@ namespace Periodicals_Catalog_MVC.Models
         public string Annotation { get; set; }
 
         public int TopicId { get; set; }
+
         public TopicModel Topic { get; set; }
+
+        public IEnumerable<CommentModel> Comments { get; set; }
         public HttpPostedFileBase UploadImage { get; set; }
 
     }

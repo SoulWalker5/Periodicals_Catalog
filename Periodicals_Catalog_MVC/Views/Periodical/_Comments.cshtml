@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Periodicals_Catalog_MVC.Models.CommentModel>
+
+<div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+    </ul>
+</div>
+
+@foreach (var item in Model)
+{
+    <div class="card-body">
+        <div class="row" style="border-bottom:solid">
+            <div class="col-md-2">
+                <p>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </p>
+            </div>
+            <div class="col-md-10" >
+                <p class="card-text">
+                    @Html.DisplayFor(modelItem => item.Text)
+                </p>
+            </div>
+            <div class="card-footer text-right">
+                @{ var time = item.CreateTime.ToString("dd MMMM yyyy HH:mm");}
+                Posted - 
+                @Html.DisplayFor(modelItem => time)
+            </div>
+        </div>
+    </div>
+}
+
+
+

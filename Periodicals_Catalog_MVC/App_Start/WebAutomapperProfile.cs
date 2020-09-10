@@ -14,6 +14,7 @@ namespace Periodicals_Catalog_MVC.App_Start
         {
             CreateMap<TopicModel, TopicBL>().ReverseMap();
             CreateMap<PeriodicalModel, PeriodicalBL>().ForMember(x => x.Topic, y => y.MapFrom(x => x.Topic)).ReverseMap();
+            CreateMap<CommentModel, CommentBL>().ForMember(x => x.Periodical, y => y.MapFrom(x => x.Periodical)).ReverseMap();
         }
     }
 }

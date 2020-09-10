@@ -1,16 +1,16 @@
 ﻿@model Periodicals_Catalog_MVC.Models.PageSetup
 @using Periodicals_Catalog_MVC.Helpers
 
-@{var hz = Request.CurrentExecutionFilePath.Split('/');
+@{var section = Request.CurrentExecutionFilePath.Split('/');
     string URL = "";
-    if (hz.Length == 2)
+    if (section.Length == 2)
     {
         URL = "";
     }
 
-    if (hz.Length == 4)
+    if (section.Length >= 4)
     {
-        string[] real = new string[] { hz[2], hz[3] };
+        string[] real = new string[] { section[2], section[3] };
         URL = "/" + string.Join("/", real);
     }
 }

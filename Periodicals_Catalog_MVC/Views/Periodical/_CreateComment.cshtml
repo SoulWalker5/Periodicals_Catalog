@@ -1,0 +1,32 @@
+﻿@model Periodicals_Catalog_MVC.Models.CommentModel
+
+@{ var request = Request.CurrentExecutionFilePath.Split('/');
+    string Id = "";
+    int length = request.Length - 1;
+    Id = request[length];
+    int realId = Int32.Parse(Id);
+}
+
+@{var userName = User.Identity.Name;}
+
+@using (Html.BeginForm("Create", "Comment", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Text, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Text, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+            </div>
+            <input type="submit" value="Send" class="btn btn-default pull-right" style="margin-right:30px" />
+        </div>
+
+        @Html.HiddenFor(model => model.CreateTime, new { @Value = DateTime.Now })
+        @Html.HiddenFor(model => model.UserName, new { @Value = userName })
+        @Html.HiddenFor(model => model.PeriodicalId, new { @Value = realId })
+
+    </div>
+}

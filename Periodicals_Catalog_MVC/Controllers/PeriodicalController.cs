@@ -6,20 +6,39 @@ using System.Web.Mvc;
 using AutoMapper;
 using BLL.Interface;
 using BLL.ModelBL;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using Periodicals_Catalog_MVC.Models;
 
 namespace Periodicals_Catalog_MVC.Controllers
 {
     public class PeriodicalController : Controller
     {
+        private ApplicationUserManager _userManager;
         private readonly IPeriodicalService _periodical;
         private readonly ITopicService _topic;
         private readonly IMapper _mapper;
+
+        public PeriodicalController(ApplicationUserManager userManager)
+        {
+            UserManager = userManager;
+        }
         public PeriodicalController(IPeriodicalService periodical, IMapper mapper, ITopicService topic)
         {
             _topic = topic;
             _periodical = periodical;
             _mapper = mapper;
+        }
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
         }
 
         // GET: Periodical
@@ -35,7 +54,6 @@ namespace Periodicals_Catalog_MVC.Controllers
             }
 
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            //ViewBag.NumberSortParm = sortOrder == "Number" ? "number_desc" : "Number";
 
             switch (sortOrder)
             {
@@ -61,6 +79,7 @@ namespace Periodicals_Catalog_MVC.Controllers
         {
             var modelBL = _periodical.FindById(id);
             var modelView = _mapper.Map<PeriodicalModel>(modelBL);
+            modelView.Comments =modelView.Comments.OrderByDescending(x => x.CreateTime);
 
             return View(modelView);
         }

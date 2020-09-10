@@ -15,6 +15,7 @@ namespace BLL
         {
             CreateMap<TopicBL, Topic>().ReverseMap();
             CreateMap<PeriodicalBL, Periodical>().ForMember(x => x.Topic, y => y.MapFrom(x => x.Topic)).ReverseMap();
+            CreateMap<CommentBL, Comment>().ForMember(x => x.Periodical, y => y.MapFrom(x => x.Periodical)).ReverseMap();
         }
     }
 }

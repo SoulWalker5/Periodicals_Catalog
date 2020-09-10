@@ -27,6 +27,7 @@ namespace Periodicals_Catalog_MVC.App_Start
 
             container = BLLightInjectConfiguration.Configuration(container);
 
+            container.Register<ICommentService, CommentService>();
             container.Register<IPeriodicalService, PeriodicalService>();
             container.Register<ITopicService, TopicService>();
 

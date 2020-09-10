@@ -18,5 +18,6 @@ namespace BLL.ModelBL
         public int TopicId { get; set; }
 
         public virtual TopicBL Topic { get; set; }
+        public virtual IEnumerable<CommentBL> Comments { get; set; }
     }
 }

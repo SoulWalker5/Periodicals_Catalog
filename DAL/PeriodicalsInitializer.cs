@@ -300,6 +300,33 @@ namespace DAL
                         "shallow, bitter woman who has tons and tons of gorgeous clothes and not much else"
                 });
 
+                context.SaveChanges();
+
+                context.Comments.Add(new Comment
+                {
+                    UserName = "Denys",
+                    CreateTime = new DateTime(2008, 5, 1, 8, 30, 52),
+                    Text = "Cool journal",
+                    Periodical = context.Periodicals.Where(t => t.Name == "Sport").FirstOrDefault()
+
+                });
+
+                context.Comments.Add(new Comment
+                {
+                    UserName = "Anna",
+                    CreateTime = new DateTime(2020, 9, 8, 18, 00, 35),
+                    Text = "This should be a comment",
+                    Periodical = context.Periodicals.Where(t => t.Name == "Sport").FirstOrDefault()
+
+                });
+                context.Comments.Add(new Comment
+                {
+                    UserName = "Anna",
+                    CreateTime = new DateTime(2015, 7, 9, 15, 30, 41),
+                    Text = "This should be a comment",
+                    Periodical = context.Periodicals.Where(t => t.Name == "VOGUE").FirstOrDefault()
+                });
+
                 base.Seed(context);
             }
             catch (Exception ex)

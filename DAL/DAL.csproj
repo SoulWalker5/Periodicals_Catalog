@@ -73,6 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\Comment.cs" />
     <Compile Include="Interface\IGenericRepository.cs" />
     <Compile Include="PeriodicalsInitializer.cs" />
     <Compile Include="PeriodicalsContext.cs" />
